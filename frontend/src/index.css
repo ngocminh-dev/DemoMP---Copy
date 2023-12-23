@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #353839;
+}
+
+/* utilities */
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* App.js */
+.App {
+  position: relative;
+}
+
+.fab {
+  margin: 10px;
+  color: #231f20;
+}
+
+.headerR {
+  background-color: white;
+  min-height: 84px;
+}
+/*Dropdown*/
+.dropdown-menu {
+  position: absolute;
+  background-color: rgb(235, 255, 235);
+  border-radius: 7px;
+  padding: 10px 20px;
+  width: 11rem;
+  top: 65px;
+  right: 3.2rem;
+}
+
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: 20px;
+  height: 20px;
+  width: 20px;
+  background: rgb(223, 255, 223);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  z-index: 2;
+  transition: 500ms ease;
+}
+
+.dropdown-menu.inactive {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: 500ms ease;
+}
+
+.dropdown-menu ul li {
+  padding: 10px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-menu ul li:hover a {
+  color: rgb(212, 33, 9);
+  cursor: pointer;
+}
+
+.dropdown-menu ul li:hover img {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.dropdownItem {
+  display: flex;
+  margin: 10px auto;
+}
+
+.dropdownItem img {
+  max-width: 20px;
+  margin-right: 10px;
+  opacity: 0.5;
+  transition: 500ms;
+}
+
+.dropdownItem a {
+  max-width: 100px;
+  margin-left: 10px;
+  transition: 500ms;
+}
+
+.menu-trigger {
+  position: relative;
+  z-index: 1000;
+  background: #f2fff5;
+  color: #231f20;
+  border: none;
+  padding: 10px;
+}
+
+.menu-trigger:hover {
+  border: 1px solid rgb(74, 163, 74);
+}
+
+.card {
+  padding: 0.5rem;
+  margin: 2rem;
+  border: 2px solid rgb(186, 186, 186);
+  border-radius: 5px;
+}
+
+.card-body {
+  padding: 0.5rem;
+}
+
+.card-img {
+  width: -webkit-fill-available;
+}
