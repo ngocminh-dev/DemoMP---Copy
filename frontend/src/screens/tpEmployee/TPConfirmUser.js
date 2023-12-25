@@ -9,13 +9,10 @@ import logger from 'use-reducer-logger';
 import axios from 'axios';
 import useState from 'react-usestateref';
 import { json } from 'react-router-dom';
-import PrintPage from './PrintPage';
 
 const SERVER = 'https://magicpostbackend.onrender.com',
-  apiList = '/storage/get-package-by-pointid',
-  apiSendPackageToStorage = '/to-storage-order/transaction-to-gathering',
-  apiSendPackageToUser = '/to-customer-order/insert',
-  apiGetInfo = '/package-information/get-information';
+  apiList = '/to-customer-order/get-unverified-order',
+  apiConfirm = '/to-customer-order/verify';
 
 const reducerList = (state, action) => {
   switch (action.type) {
@@ -30,7 +27,7 @@ const reducerList = (state, action) => {
   }
 };
 
-function TPStorage() {
+function TPConfirmUser() {
   const [{ loadingList, errorList, packages }, dispatchList] = useReducer(
     logger(reducerList),
     {
@@ -40,21 +37,11 @@ function TPStorage() {
     }
   );
   useEffect(() => {
-    const options = {
-      body: {
-        pointId: JSON.parse(localStorage.user).pointId,
-        pagesize: 0,
-        pageindex: 0,
-      },
-    };
-
     const fetchData = async () => {
       dispatchList({ type: 'FETCH_REQUEST' });
       try {
-        const result = await axios.post(SERVER + apiList, options, {
-          headers: {
-            'validate-token': localStorage.token,
-          },
+        const result = await axios.get(SERVER + apiList, {
+          params: { employeeId: JSON.parse(localStorage.user).username },
         });
         dispatchList({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (error) {
@@ -72,48 +59,14 @@ function TPStorage() {
     });
   };
 
-  const handleSendToStorage = (evt) => {
-    var packageId = evt.target.parentNode.parentNode.getAttribute('packageId');
+  function handleConfirm(p, stt) {
     const options = {
       body: {
-        packageId: packageId,
-        fromPoint: JSON.parse(localStorage.user).pointId,
-        toPoint: '',
-        responsibleBy: JSON.parse(localStorage.user).username,
-        status: 'transporting',
-        verifiedBy: '',
-        verifiedDate: 0,
-        createdDate: 0,
-        lastUpdatedDate: 0,
-      },
-    };
-
-    const fetchData = async () => {
-      try {
-        const result = await axios.post(
-          SERVER + apiSendPackageToStorage,
-          options,
-          {
-            headers: {
-              'validate-token': localStorage.token,
-            },
-          }
-        );
-        alert('Gửi hàng thành công');
-        window.location.reload();
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  };
-  function handleSendToUser(p) {
-    const options = {
-      body: {
+        _id: p._id,
         packageId: p.packageId,
         transactionPointId: JSON.parse(localStorage.user).pointId,
         responsibleBy: JSON.parse(localStorage.user).username,
-        status: 'transporting',
+        status: stt,
         createdDate: 0,
         lastUpdatedDate: 0,
       },
@@ -121,47 +74,20 @@ function TPStorage() {
 
     const fetchData = async () => {
       try {
-        const result = await axios.post(
-          SERVER + apiSendPackageToUser,
-          options,
-          {
-            headers: {
-              'validate-token': localStorage.token,
-            },
-          }
-        );
-        alert('Gửi hàng thành công');
+        const result = await axios.post(SERVER + apiConfirm, options, {
+          headers: {
+            'validate-token': localStorage.token,
+          },
+        });
+        alert('Đã xác nhận');
         window.location.reload();
       } catch (error) {
-        alert('Đơn hàng đang không ở đúng điểm giao dịch đích');
         console.log(error);
       }
     };
-    fetchData();
+    return fetchData();
   }
-  function handlePrint(p, ele) {
-    ele.target.disabled = true;
-    ele.target.innerHTML = 'Loading...';
-    const fetchData = async () => {
-      try {
-        const result = await axios.get(
-          SERVER + apiGetInfo,
 
-          {
-            params: { packageId: p.packageId },
-          }
-        );
-        PrintPage(result.data);
-        ele.target.disabled = false;
-        ele.target.innerHTML = 'Thông tin hàng';
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-
-    return;
-  }
   return loadingList ? (
     <p style={{ textAlign: 'center' }}>Loading list ...</p>
   ) : errorList ? (
@@ -169,7 +95,7 @@ function TPStorage() {
   ) : (
     <div>
       <div className={styles.featuresHeading}>
-        <p>Thống kê đơn hàng tại điểm giao dịch</p>
+        <p>Xác nhận đơn hàng đến tay người nhận</p>
       </div>
 
       <div className={styles.inputLocation}>
@@ -191,14 +117,18 @@ function TPStorage() {
                   <CardTitle style={{ fontSize: '1.5rem' }}>
                     {'Mã hàng: ' + p.packageId}
                   </CardTitle>
-                  <button onClick={(evt) => handlePrint(p, evt)}>
-                    Thông tin hàng
+                  <button
+                    type="button"
+                    onClick={() => handleConfirm(p, 'received')}
+                  >
+                    Đã nhận được
                   </button>
-                  <button onClick={handleSendToStorage}>
-                    Gửi hàng tới điểm tập kết
-                  </button>
-                  <button type="button" onClick={() => handleSendToUser(p)}>
-                    Gửi hàng tới người nhận
+                  <button
+                    type="button"
+                    onClick={() => handleConfirm(p, 'notreceived')}
+                    style={{ backgroundColor: 'red' }}
+                  >
+                    Không nhận được
                   </button>
                 </CardBody>
               </Card>
@@ -209,4 +139,4 @@ function TPStorage() {
     </div>
   );
 }
-export default TPStorage;
+export default TPConfirmUser;

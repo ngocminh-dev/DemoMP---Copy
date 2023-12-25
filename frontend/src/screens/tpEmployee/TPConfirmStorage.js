@@ -11,7 +11,7 @@ import useState from 'react-usestateref';
 import { json } from 'react-router-dom';
 
 const SERVER = 'https://magicpostbackend.onrender.com',
-  apiGetList = '/to-storage-order/get-unverified-order',
+  apiList = '/to-storage-order/get-unverified-order',
   apiConfirm = '/to-storage-order/verify-order';
 
 const reducerList = (state, action) => {
@@ -27,7 +27,7 @@ const reducerList = (state, action) => {
   }
 };
 
-function TPStorage() {
+function TPConfirmStorage() {
   const [{ loadingList, errorList, packages }, dispatchList] = useReducer(
     logger(reducerList),
     {
@@ -40,7 +40,7 @@ function TPStorage() {
     const fetchData = async () => {
       dispatchList({ type: 'FETCH_REQUEST' });
       try {
-        const result = await axios.get(SERVER + apiGetList, {
+        const result = await axios.get(SERVER + apiList, {
           params: { storageId: JSON.parse(localStorage.user).pointId },
         });
         dispatchList({ type: 'FETCH_SUCCESS', payload: result.data });
@@ -50,15 +50,6 @@ function TPStorage() {
     };
     fetchData();
   }, []);
-
-  const handleSearch = (evt) => {
-    var searchValue = evt.target.value.toUpperCase() || '';
-    packages.map((p) => {
-      if (p.packageId.toUpperCase().indexOf(searchValue) > -1)
-        document.getElementById(p.packageId).style.display = '';
-      else document.getElementById(p.packageId).style.display = 'none';
-    });
-  };
 
   function handleConfirm(p, stt) {
     const options = {
@@ -94,6 +85,15 @@ function TPStorage() {
     return fetchData();
   }
 
+  const handleSearch = (evt) => {
+    var searchValue = evt.target.value.toUpperCase() || '';
+    packages.map((p) => {
+      if (p.packageId.toUpperCase().indexOf(searchValue) > -1)
+        document.getElementById(p.packageId).style.display = '';
+      else document.getElementById(p.packageId).style.display = 'none';
+    });
+  };
+
   return loadingList ? (
     <p style={{ textAlign: 'center' }}>Loading list ...</p>
   ) : errorList ? (
@@ -101,7 +101,7 @@ function TPStorage() {
   ) : (
     <div>
       <div className={styles.featuresHeading}>
-        <p>Danh sách đơn hàng đang tới </p>
+        <p>Thống kê đơn hàng chờ xác nhận</p>
       </div>
 
       <div className={styles.inputLocation}>
@@ -118,7 +118,7 @@ function TPStorage() {
         <div className={`${styles.featuresList} `}>
           {packages.toReversed().map((p) => {
             return (
-              <Card key={p._id} id={p._id}>
+              <Card key={p._id} packageId={p.packageId} id={p.packageId}>
                 <CardBody>
                   <CardTitle style={{ fontSize: '1.5rem' }}>
                     {'Mã hàng: ' + p.packageId}
@@ -127,11 +127,11 @@ function TPStorage() {
                     type="button"
                     onClick={() => handleConfirm(p, 'received')}
                   >
-                    Đã nhận được
+                    Xác nhận
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleConfirm(p, 'notreceived')}
+                    onClick={() => handleConfirm(p, 'received')}
                     style={{ backgroundColor: 'red' }}
                   >
                     Không nhận được
@@ -145,4 +145,4 @@ function TPStorage() {
     </div>
   );
 }
-export default TPStorage;
+export default TPConfirmStorage;

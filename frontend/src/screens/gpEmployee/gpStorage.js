@@ -12,8 +12,10 @@ import { json } from 'react-router-dom';
 
 const SERVER = 'https://magicpostbackend.onrender.com',
   apiListGather = '/gathering-point/get-gathering-points',
-  apiGetList = '/storage/get-package-by-pointid';
-
+  apiGetList = '/storage/get-package-by-pointid',
+  apiToGathering = '/to-storage-order/gathering-to-gathering',
+  apiToTransaction = '/to-storage-order/gathering-to-transaction',
+  apiGetTransaction = '/gathering-point/get-gathering-belongings';
 const reducerList = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST_LIST':
@@ -39,7 +41,29 @@ const reducerGather = (state, action) => {
   }
 };
 
+const reducerTransaction = (state, action) => {
+  switch (action.type) {
+    case 'FETCH_REQUEST_TRANSACTION':
+      return { ...state, loadingTransaction: true };
+    case 'FETCH_SUCCESS_TRANSACTION':
+      return {
+        ...state,
+        listTransaction: action.payload,
+        loadingTransaction: false,
+      };
+    case 'FETCH_FAIL_TRANSACTION':
+      return {
+        ...state,
+        loadingTransaction: false,
+        errorTransaction: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 function GPStorage() {
+  //fetch all data first
   const [{ loadingList, errorList, packages }, dispatchList] = useReducer(
     logger(reducerList),
     {
@@ -54,6 +78,14 @@ function GPStorage() {
       loadingGather: true,
       errorGather: '',
     });
+  const [
+    { loadingTransaction, errorTransaction, listTransaction },
+    dispatchTransaction,
+  ] = useReducer(logger(reducerTransaction), {
+    listTransaction: [],
+    loadingTransaction: true,
+    errorTransaction: '',
+  });
   const options = {
     body: {
       pointId: JSON.parse(localStorage.user).pointId,
@@ -67,10 +99,20 @@ function GPStorage() {
       pageindex: 0,
     },
   };
+
+  const optionsTransition = {
+    body: {
+      gatheringPointId: JSON.parse(localStorage.user).pointId,
+      pagesize: 0,
+      pageindex: 0,
+    },
+  };
   useEffect(() => {
     const fetchData = async () => {
       dispatchList({ type: 'FETCH_REQUEST_LIST' });
       dispatchGather({ type: 'FETCH_REQUEST_GATHER' });
+      dispatchTransaction({ type: 'FETCH_REQUEST_TRANSACTION' });
+      //Get list package
       try {
         const resultList = await axios.post(SERVER + apiGetList, options, {
           headers: {
@@ -83,6 +125,8 @@ function GPStorage() {
       } catch (error) {
         dispatchList({ type: 'FETCH_FAIL_LIST', payload: error.message });
       }
+
+      //get list gather
       try {
         const resultGather = await axios.post(
           SERVER + apiListGather,
@@ -100,9 +144,45 @@ function GPStorage() {
       } catch (error) {
         dispatchGather({ type: 'FETCH_FAIL_GATHER', payload: error.message });
       }
+
+      //get list transaction
+      try {
+        const resultTransition = await axios.post(
+          SERVER + apiGetTransaction,
+          optionsTransition,
+          {
+            headers: {
+              'validate-token': localStorage.token,
+            },
+          }
+        );
+        dispatchTransaction({
+          type: 'FETCH_SUCCESS_TRANSACTION',
+          payload: resultTransition.data,
+        });
+      } catch (error) {
+        dispatchTransaction({
+          type: 'FETCH_FAIL_TRANSACTION',
+          payload: error.message,
+        });
+      }
     };
     fetchData();
   }, []);
+
+  //handle change on data
+  const [state, setState, stateRef] = useState({
+    point: '',
+    transactionPoint: '',
+  });
+  const handleChange = (evt) => {
+    const value = evt.target.value;
+    setState({
+      ...state,
+      [evt.target.name]: value,
+    });
+  };
+
   const handleSearch = (evt) => {
     var searchValue = evt.target.value.toUpperCase() || '';
     packages.map((p) => {
@@ -112,18 +192,16 @@ function GPStorage() {
     });
   };
 
-  function handleConfirm(p, stt) {
+  function handleSendGathering(p) {
+    const { point, transactionPoint } = state;
     const options = {
       body: {
-        _id: p._id,
-        fromType: p.fromType,
-        toType: p.toType,
         packageId: p.packageId,
-        fromPoint: p.fromPoint,
-        toPoint: p.toPoint,
-        responsibleBy: p.responsibleBy,
-        status: stt,
-        verifiedBy: JSON.parse(localStorage.user).username,
+        fromPoint: JSON.parse(localStorage.user).pointId,
+        toPoint: point,
+        responsibleBy: JSON.parse(localStorage.user).username,
+        status: 'transporting',
+        verifiedBy: '',
         verifiedDate: 0,
         createdDate: 0,
         lastUpdatedDate: 0,
@@ -132,7 +210,38 @@ function GPStorage() {
 
     const fetchData = async () => {
       try {
-        const result = await axios.post(SERVER + apiGetList, options, {
+        const result = await axios.post(SERVER + apiToGathering, options, {
+          headers: {
+            'validate-token': localStorage.token,
+          },
+        });
+        alert('Đã xác nhận');
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    return fetchData();
+  }
+  function handleSendTransaction(p) {
+    const { point, transactionPoint } = state;
+    const options = {
+      body: {
+        packageId: p.packageId,
+        fromPoint: JSON.parse(localStorage.user).pointId,
+        toPoint: transactionPoint,
+        responsibleBy: JSON.parse(localStorage.user).username,
+        status: 'transporting',
+        verifiedBy: '',
+        verifiedDate: 0,
+        createdDate: 0,
+        lastUpdatedDate: 0,
+      },
+    };
+
+    const fetchData = async () => {
+      try {
+        const result = await axios.post(SERVER + apiToTransaction, options, {
           headers: {
             'validate-token': localStorage.token,
           },
@@ -168,22 +277,56 @@ function GPStorage() {
       </div>
       <div className={`${styles.featuresListWrapper} `}>
         <div className={`${styles.featuresList} `}>
-          {packages.map((p) => {
+          {packages.toReversed().map((p) => {
             return (
               <Card key={p._id} id={p._id}>
                 <CardBody>
                   <CardTitle style={{ fontSize: '1.5rem' }}>
                     {'Mã hàng: ' + p.packageId}
                   </CardTitle>
-                  <form>
-                    <select value="" className="lastPoint">
-                      <option value="">Chọn điểm đến </option>
+                  <div>
+                    <select
+                      id="point"
+                      name="point"
+                      className="lastPoint"
+                      onChange={handleChange}
+                    >
+                      <option value="" disabled selected>
+                        Chọn điểm tập kết đến
+                      </option>
                       {listGather.map((g) => {
                         return <option value={g._id}>{g.name}</option>;
                       })}
                     </select>
-                    <button type="button">Chuyển hàng</button>
-                  </form>
+                    <button
+                      type="button"
+                      onClick={() => handleSendGathering(p)}
+                    >
+                      Chuyển hàng đến điểm tập kết đích
+                    </button>
+                  </div>
+                  <div>
+                    <select
+                      id="transactionPoint"
+                      name="transactionPoint"
+                      className="lastPoint"
+                      onChange={handleChange}
+                    >
+                      <option value="" disabled selected>
+                        Chọn điểm giao dịch đến
+                      </option>
+                      {listTransaction.map((g) => {
+                        return <option value={g._id}>{g.name}</option>;
+                      })}
+                    </select>
+
+                    <button
+                      type="button"
+                      onClick={() => handleSendTransaction(p)}
+                    >
+                      Chuyển hàng đến điểm giao dịch
+                    </button>
+                  </div>
                 </CardBody>
               </Card>
             );

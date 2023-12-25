@@ -1,8 +1,20 @@
 import DropDownBtn from '../DropDownButton/Drop';
 
 const tpEmployee = {
-    path: ['/tpEmployee/create', '/tpEmployee/list', '/tpEmployee/storage'],
-    displayText: ['Tạo đơn hàng', 'Thống kê', 'Kho'],
+    path: [
+      '/tpEmployee/create',
+      '/tpEmployee/list',
+      '/tpEmployee/storage',
+      '/tpEmployee/confirm-package-to-storage',
+      '/tpEmployee/confirm-package-to-user',
+    ],
+    displayText: [
+      'Tạo đơn hàng',
+      'Thống kê',
+      'Kho',
+      'Xác nhận đơn về kho',
+      'Xác nhận đơn hàng đến người nhận',
+    ],
   },
   tpManager = {
     path: ['/tpManager/users', '/tpManager/list'],

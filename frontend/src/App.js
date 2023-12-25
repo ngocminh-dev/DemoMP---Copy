@@ -23,6 +23,8 @@ import DGp from './screens/director/DGp.js';
 import DTp from './screens/director/DTp.js';
 import TPStorage from './screens/tpEmployee/TPStorage.js';
 import GPStorage from './screens/gpEmployee/gpStorage.js';
+import TPConfirmStorage from './screens/tpEmployee/TPConfirmStorage.js';
+import TPConfirmUser from './screens/tpEmployee/TPConfirmUser.js';
 
 export default function App() {
   const [hamActive, setHamActive] = useState(false);
@@ -45,6 +47,14 @@ export default function App() {
           <Route path="/tpEmployee/recordReceive" element={<RecordReceive />} />
           <Route path="/tpEmployee/list" element={<TPList />} />
           <Route path="/tpEmployee/storage" element={<TPStorage />} />
+          <Route
+            path="/tpEmployee/confirm-package-to-storage"
+            element={<TPConfirmStorage />}
+          />
+          <Route
+            path="/tpEmployee/confirm-package-to-user"
+            element={<TPConfirmUser />}
+          />
 
           {/*Trans manager*/}
           <Route path="/tpManager/users" element={<TpUser />} />

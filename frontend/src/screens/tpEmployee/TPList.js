@@ -39,7 +39,7 @@ function TPList() {
       body: {
         employeeId: JSON.parse(localStorage.user).username,
         pointId: JSON.parse(localStorage.user).pointId,
-        status: 'notreceived',
+        status: 'all',
         pagesize: 0,
         pageindex: 0,
       },
@@ -97,31 +97,35 @@ function TPList() {
       </div>
       <div className={`${styles.featuresListWrapper} center`}>
         <div className={`${styles.featuresList} center`}>
-          {packages.map(({ _id, packageId, responsibleBy, status }) => {
-            return (
-              <Card key={_id} id={_id}>
-                <CardBody>
-                  <CardTitle>{'Mã hàng: ' + packageId}</CardTitle>
-                  <CardText>
-                    {'Nhân viên chịu trách nhiệm: ' + responsibleBy}
-                  </CardText>
+          {packages
+            .toReversed()
+            .map(({ _id, packageId, responsibleBy, status }) => {
+              return (
+                <Card key={_id} id={_id}>
+                  <CardBody>
+                    <CardTitle>{'Mã hàng: ' + packageId}</CardTitle>
+                    <CardText>
+                      {'Nhân viên chịu trách nhiệm: ' + responsibleBy}
+                    </CardText>
 
-                  <CardText>
-                    {'Trạng thái: '}
-                    {status === 'transporting' ? (
-                      <div style={{ color: 'darkgreen' }}>Đang vận chuyển</div>
-                    ) : status === 'received' ? (
-                      <div style={{ color: 'darkorange' }}>Đã nhận </div>
-                    ) : status === 'notreceived' ? (
-                      <div style={{ color: 'brown' }}>Trả lại </div>
-                    ) : (
-                      <div style={{ color: 'yellow' }}>Unknown</div>
-                    )}
-                  </CardText>
-                </CardBody>
-              </Card>
-            );
-          })}
+                    <CardText>
+                      {'Trạng thái: '}
+                      {status === 'transporting' ? (
+                        <div style={{ color: 'darkgreen' }}>
+                          Đang vận chuyển
+                        </div>
+                      ) : status === 'received' ? (
+                        <div style={{ color: 'darkorange' }}>Đã nhận </div>
+                      ) : status === 'notreceived' ? (
+                        <div style={{ color: 'brown' }}>Trả lại </div>
+                      ) : (
+                        <div style={{ color: 'yellow' }}>Unknown</div>
+                      )}
+                    </CardText>
+                  </CardBody>
+                </Card>
+              );
+            })}
         </div>
       </div>
     </div>
