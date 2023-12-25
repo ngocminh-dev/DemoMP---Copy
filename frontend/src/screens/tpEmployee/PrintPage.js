@@ -64,8 +64,15 @@ function PrintPage(params) {
   text = document.createTextNode('Biên lai đơn hàng hàng');
   tag.appendChild(text);
   body.appendChild(tag);
-  w.print();
-  w.close();
+
+  tag = document.createElement('button');
+  tag.onclick = () => {
+    body.removeChild(tag);
+    w.print();
+  };
+  text = document.createTextNode('In');
+  tag.appendChild(text);
+  body.appendChild(tag);
   return;
 }
 export default PrintPage;

@@ -25,6 +25,8 @@ import TPStorage from './screens/tpEmployee/TPStorage.js';
 import GPStorage from './screens/gpEmployee/gpStorage.js';
 import TPConfirmStorage from './screens/tpEmployee/TPConfirmStorage.js';
 import TPConfirmUser from './screens/tpEmployee/TPConfirmUser.js';
+import UserScreen from './screens/director/UserScreen.js';
+import ProductScreen from './screens/director/ProductScreen.js';
 
 export default function App() {
   const [hamActive, setHamActive] = useState(false);
@@ -69,9 +71,19 @@ export default function App() {
           <Route path="/gpManager/list" element={<GpList />} />
 
           {/*director*/}
-          <Route path="/director/list" element={<DList />} />
+
           <Route path="/director/gp" element={<DGp />} />
           <Route path="/director/tp" element={<DTp />} />
+          <Route path="/director/gp/user/:slug" element={<UserScreen />} />
+          <Route path="/director/tp/user/:slug" element={<UserScreen />} />
+          <Route
+            path="/director/gp/product/:slug"
+            element={<ProductScreen />}
+          />
+          <Route
+            path="/director/tp/product/:slug"
+            element={<ProductScreen />}
+          />
         </Routes>
       </main>
       <Footer />

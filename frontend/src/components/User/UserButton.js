@@ -29,8 +29,8 @@ const tpEmployee = {
     displayText: ['Quản lí nhân viên', 'Thống kê'],
   },
   director = {
-    path: ['/director/list', '/director/gp', '/director/tp'],
-    displayText: ['Thống kê', 'Điểm tập kết', 'Điểm giao dịch'],
+    path: ['/director/gp', '/director/tp'],
+    displayText: ['Điểm tập kết', 'Điểm giao dịch'],
   };
 
 function featureDropDown(info) {
