@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React from 'react';
 import useState from 'react-usestateref';
 
 const SERVER = 'https://magicpostbackend.onrender.com';
-var apiPath = '/user-information/customer-sign-up';
+var apiSubmit = '/user-information/customer-sign-up',
+  apiChangePassword = '/user-information/change-password';
 
 function Info() {
   var info = JSON.parse(localStorage.getItem('user')) || {
@@ -65,38 +67,54 @@ function Info() {
       stateRef.current;
 
     const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        body: {
-          //username: name,
-          password: password,
-          //role: 'customer',
-          email: '',
-          familyName: familyName,
-          lastName: lastName,
-          //dateOfBirth: 0,
-          //createdDate: 0,
-          //lastUpdatedDate: 0,
-        },
-      }),
+      body: {
+        //username: name,
+        //password: password,
+        //role: 'customer',
+        email: email,
+        familyName: familyName,
+        lastName: lastName,
+        //dateOfBirth: 0,
+        //createdDate: 0,
+        //lastUpdatedDate: 0,
+      },
     };
-    fetch(SERVER + apiPath, options)
-      .then((res) => res.text())
-      .then((data) => {
-        alert(data.message);
-      })
-      .catch((rejected) => {
-        console.log(rejected);
-      });
-    for (const key in state) {
-      setState({
-        ...state,
-        [key]: '',
-      });
-    }
-  };
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(SERVER + apiSubmit, options, {
+          headers: {
+            'validate-token': localStorage.token,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      if (password !== '') {
+        const options = {
+          body: {
+            newPassword: password,
+          },
+        };
+        try {
+          const response = await axios.post(
+            SERVER + apiChangePassword,
+            options,
+            {
+              headers: {
+                'validate-token': localStorage.token,
+              },
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      alert('Đã thay đổi thông tin!');
+      window.location.reload();
+    };
 
+    fetchData();
+  };
   return (
     <form onSubmit={handleOnSubmit}>
       <h1 style={{ margin: '0 0 1rem 0' }}>Thông tin cá nhân</h1>

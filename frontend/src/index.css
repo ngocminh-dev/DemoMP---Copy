@@ -136,3 +136,18 @@ li {
 .card-img {
   width: -webkit-fill-available;
 }
+
+#form-forgot {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: 15%;
+  padding: 10px;
+}
+#forgot-btn {
+  padding: 3px 6px;
+  margin-left: 18px;
+  font-size: 10px;
+}

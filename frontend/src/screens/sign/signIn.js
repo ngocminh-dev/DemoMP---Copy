@@ -1,14 +1,16 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SERVER = 'https://magicpostbackend.onrender.com';
 var apiPathSentInfo = '/user-information/log-in';
 var apiPathGetInfo = '/user-information/get-user-info';
+var apiForgot = '/password-forgot-request/insert';
 
 function SignInForm() {
   const [text, setText] = useState('Sign in');
   const [state, setState] = React.useState({
-    email: '',
+    username: '',
     password: '',
   });
 
@@ -29,13 +31,13 @@ function SignInForm() {
   const handleOnSubmit = (evt) => {
     evt.preventDefault();
     setText('Logging...');
-    const { email, password } = state;
+    const { username, password } = state;
     const optionsPost = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         body: {
-          username: email,
+          username: username,
           password: password,
         },
       }),
@@ -78,6 +80,39 @@ function SignInForm() {
       });
     }
   };
+  function handleShowForm(id) {
+    var ele = document.getElementById(id);
+    if (ele.style.display === 'none') {
+      ele.style.display = '';
+    } else ele.style.display = 'none';
+  }
+
+  function handleForgot() {
+    const { username, password } = state;
+    const options = {
+      body: {
+        username: username,
+      },
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(SERVER + apiForgot, options, {
+          headers: {
+            'validate-token': localStorage.token,
+          },
+        });
+
+        alert('Đã gửi mật khẩu mới đến email của bạn!');
+        window.location.reload();
+      } catch (error) {
+        // Handle error
+        alert(error.response.data.message);
+      }
+    };
+
+    fetchData();
+  }
 
   return (
     <div className="form-container sign-in-container">
@@ -86,8 +121,8 @@ function SignInForm() {
         <input
           type="text"
           placeholder="Username"
-          name="email"
-          value={state.email}
+          name="username"
+          value={state.username}
           onChange={handleChange}
         />
         <input
@@ -97,7 +132,21 @@ function SignInForm() {
           value={state.password}
           onChange={handleChange}
         />
-        <a href="#">Forgot your password?</a>
+        <a onClick={() => handleShowForm('form-forgot')}>
+          Forgot your password?
+        </a>
+        <form id="form-forgot" style={{ display: 'none' }}>
+          <input
+            type="text"
+            placeholder="Username"
+            name="username"
+            value={state.username}
+            onChange={handleChange}
+          />
+          <button type="button" id="forgot-btn" onClick={() => handleForgot()}>
+            Lấy lại mật khẩu
+          </button>
+        </form>
         <button>Sign In</button>
       </form>
     </div>

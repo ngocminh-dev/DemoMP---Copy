@@ -10,6 +10,7 @@ function SignUpForm() {
     name: '',
     password1: '',
     password: '',
+    email: '',
   });
   const handleChange = (evt) => {
     const value = evt.target.value;
@@ -23,7 +24,7 @@ function SignUpForm() {
     setText('Checking your information...');
     evt.preventDefault();
 
-    const { name, password1, password } = state;
+    const { name, password1, password, email } = state;
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -32,7 +33,7 @@ function SignUpForm() {
           username: name,
           password: password,
           role: 'customer',
-          email: '',
+          email: email,
           familyName: '1',
           lastName: name,
           dateOfBirth: 0,
@@ -44,7 +45,7 @@ function SignUpForm() {
     fetch(SERVER + apiPath, options)
       .then((res) => res.text())
       .then((data) => {
-        alert(data);
+        alert('Đăng kí tài khoản thành công!');
         setText('Create account');
       })
       .catch((rejected) => {
@@ -62,7 +63,13 @@ function SignUpForm() {
     <div className="form-container sign-up-container">
       <form onSubmit={handleOnSubmit}>
         <h1>{text}</h1>
-
+        <input
+          type="text"
+          name="email"
+          value={state.email}
+          onChange={handleChange}
+          placeholder="Email"
+        />
         <input
           type="text"
           name="name"
