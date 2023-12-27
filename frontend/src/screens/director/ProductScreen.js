@@ -54,7 +54,7 @@ const reducerListProduct2 = (state, action) => {
 
 function ProductScreen() {
   const params = useParams();
-  const { slug } = params;
+  const { point, slug } = params;
   const [
     { loadingListProduct, errorListProduct, listProduct },
     dispatchListProduct,
@@ -76,7 +76,7 @@ function ProductScreen() {
     const options = {
       body: {
         pointId: slug,
-        type: 'gathering',
+        type: '',
         pagesize: 0,
         pageindex: 0,
       },
@@ -124,7 +124,9 @@ function ProductScreen() {
   return (
     <div>
       <div className={styles.featuresHeading}>
-        <p>Danh sách đơn hàng tại điểm tập kết</p>
+        <p>
+          Danh sách đơn hàng tại điểm {point === 'gp' ? 'tập kết' : 'giao dịch'}
+        </p>
         <p>Tổng số đơn hàng là: {Object.keys(list).length}</p>
       </div>
 

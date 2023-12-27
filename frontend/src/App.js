@@ -14,19 +14,18 @@ import RecordReceive from './screens/tpEmployee/RecordReceive.js';
 import TPList from './screens/tpEmployee/TPList.js';
 import TpUser from './screens/tpManager/TpUser.js';
 import TpList from './screens/tpManager/TpList.js';
-import GpCreate from './screens/gpEmployee/gpStorage.js';
+
 import GpConfirm from './screens/gpEmployee/gpConfirm.js';
 import GpUser from './screens/gpManager/GpUser.js';
 import GpList from './screens/gpManager/GpList.js';
-import DList from './screens/director/DList.js';
-import DGp from './screens/director/DGp.js';
-import DTp from './screens/director/DTp.js';
+
 import TPStorage from './screens/tpEmployee/TPStorage.js';
 import GPStorage from './screens/gpEmployee/gpStorage.js';
 import TPConfirmStorage from './screens/tpEmployee/TPConfirmStorage.js';
 import TPConfirmUser from './screens/tpEmployee/TPConfirmUser.js';
 import UserScreen from './screens/director/UserScreen.js';
 import ProductScreen from './screens/director/ProductScreen.js';
+import DP from './screens/director/DP.js';
 
 export default function App() {
   const [hamActive, setHamActive] = useState(false);
@@ -72,16 +71,11 @@ export default function App() {
 
           {/*director*/}
 
-          <Route path="/director/gp" element={<DGp />} />
-          <Route path="/director/tp" element={<DTp />} />
-          <Route path="/director/gp/user/:slug" element={<UserScreen />} />
-          <Route path="/director/tp/user/:slug" element={<UserScreen />} />
+          <Route path="/director/:point" element={<DP />} />
+          <Route path="/director/:point/user/:slug" element={<UserScreen />} />
+
           <Route
-            path="/director/gp/product/:slug"
-            element={<ProductScreen />}
-          />
-          <Route
-            path="/director/tp/product/:slug"
+            path="/director/:point/product/:slug"
             element={<ProductScreen />}
           />
         </Routes>
