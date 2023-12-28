@@ -25,6 +25,11 @@
 .featuresWrapper {
   flex-direction: column;
 }
+.featuresHeading {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
 .featuresHeading p {
   margin: 75px 10px 30px 10px;
@@ -132,4 +137,26 @@
 
 .radioGroup input {
   width: auto;
+}
+
+.list_trans {
+}
+
+.list_trans_item {
+  width: fit-content;
+  margin: 10px;
+}
+
+.delete_button {
+  float: right;
+  background-color: red;
+}
+.showProduct {
+  display: flex;
+  justify-content: center;
+}
+.showProductPanel {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }

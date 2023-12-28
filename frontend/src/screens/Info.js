@@ -4,7 +4,8 @@ import useState from 'react-usestateref';
 
 const SERVER = 'https://magicpostbackend.onrender.com';
 var apiSubmit = '/user-information/customer-sign-up',
-  apiChangePassword = '/user-information/change-password';
+  apiChangePassword = '/user-information/change-password',
+  apiUpdateInfo = '/user-information/user-update';
 
 function Info() {
   var info = JSON.parse(localStorage.getItem('user')) || {
@@ -68,24 +69,25 @@ function Info() {
 
     const options = {
       body: {
-        //username: name,
-        //password: password,
-        //role: 'customer',
-        email: email,
+        username: JSON.parse(localStorage.user).username,
+        password: JSON.parse(localStorage.user).password,
+        role: JSON.parse(localStorage.user).role,
+        email: email ? email : JSON.parse(localStorage.user).email,
         familyName: familyName,
         lastName: lastName,
-        //dateOfBirth: 0,
-        //createdDate: 0,
-        //lastUpdatedDate: 0,
+        dateOfBirth: 0,
+        createdDate: 0,
+        lastUpdatedDate: 0,
       },
     };
     const fetchData = async () => {
       try {
-        const response = await axios.post(SERVER + apiSubmit, options, {
+        const response = await axios.post(SERVER + apiUpdateInfo, options, {
           headers: {
             'validate-token': localStorage.token,
           },
         });
+        localStorage.user = JSON.stringify(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -132,7 +134,6 @@ function Info() {
         <input
           type="text"
           name="familyName"
-          value={state.familyName}
           onChange={handleChange}
           placeholder={info.familyName}
         />
@@ -142,7 +143,6 @@ function Info() {
         <input
           type="text"
           name="lastName"
-          value={state.lastName}
           onChange={handleChange}
           placeholder={info.lastName}
         />
@@ -152,7 +152,6 @@ function Info() {
         <input
           type="email"
           name="email"
-          value={state.email}
           onChange={handleChange}
           placeholder={'Email' || info.email}
         />
@@ -163,7 +162,6 @@ function Info() {
         <input
           type="password"
           name="password"
-          value={state.password}
           onChange={handleChange}
           placeholder="Password"
         />
@@ -175,7 +173,6 @@ function Info() {
         <input
           type="password"
           name="password1"
-          value={state.password1}
           onChange={handleChange}
           placeholder="Re-Password"
         />

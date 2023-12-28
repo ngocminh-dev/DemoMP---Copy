@@ -12,12 +12,8 @@ import './style.css';
 import RecordSend from './screens/tpEmployee/RecordSend.js';
 import RecordReceive from './screens/tpEmployee/RecordReceive.js';
 import TPList from './screens/tpEmployee/TPList.js';
-import TpUser from './screens/tpManager/TpUser.js';
-import TpList from './screens/tpManager/TpList.js';
 
 import GpConfirm from './screens/gpEmployee/gpConfirm.js';
-import GpUser from './screens/gpManager/GpUser.js';
-import GpList from './screens/gpManager/GpList.js';
 
 import TPStorage from './screens/tpEmployee/TPStorage.js';
 import GPStorage from './screens/gpEmployee/gpStorage.js';
@@ -26,6 +22,8 @@ import TPConfirmUser from './screens/tpEmployee/TPConfirmUser.js';
 import UserScreen from './screens/director/UserScreen.js';
 import ProductScreen from './screens/director/ProductScreen.js';
 import DP from './screens/director/DP.js';
+import MUserScreen from './screens/Manager/MUserScreen.js';
+import MProductScreen from './screens/Manager/MProductScreen.js';
 
 export default function App() {
   const [hamActive, setHamActive] = useState(false);
@@ -57,17 +55,13 @@ export default function App() {
             element={<TPConfirmUser />}
           />
 
-          {/*Trans manager*/}
-          <Route path="/tpManager/users" element={<TpUser />} />
-          <Route path="/tpManager/list" element={<TpList />} />
+          {/*Manager*/}
+          <Route path="/:point/users" element={<MUserScreen />} />
+          <Route path="/:point/list" element={<MProductScreen />} />
 
           {/*Gathering employee */}
           <Route path="/gpEmployee/storage" element={<GPStorage />} />
           <Route path="/gpEmployee/confirm" element={<GpConfirm />} />
-
-          {/*Gathering manager*/}
-          <Route path="/gpManager/users" element={<GpUser />} />
-          <Route path="/gpManager/list" element={<GpList />} />
 
           {/*director*/}
 

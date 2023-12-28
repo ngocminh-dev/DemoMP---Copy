@@ -17,16 +17,16 @@ const tpEmployee = {
     ],
   },
   tpManager = {
-    path: ['/tpManager/users', '/tpManager/list'],
-    displayText: ['Quản lí nhân viên', 'Thống kê'],
+    path: ['/tp/users', '/tp/list'],
+    displayText: ['Quản lí nhân viên', 'Thống kê đơn hàng'],
   },
   gpEmployee = {
     path: ['/gpEmployee/storage', '/gpEmployee/confirm'],
     displayText: ['Kho', 'Xác nhận đơn'],
   },
   gpManager = {
-    path: ['/gpManager/users', '/gpManager/list'],
-    displayText: ['Quản lí nhân viên', 'Thống kê'],
+    path: ['/gp/users', '/gp/list'],
+    displayText: ['Quản lí nhân viên', 'Thống kê đơn hàng'],
   },
   director = {
     path: ['/director/gp', '/director/tp'],

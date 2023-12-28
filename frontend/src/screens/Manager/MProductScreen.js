@@ -51,9 +51,9 @@ const reducerListProduct2 = (state, action) => {
   }
 };
 
-function ProductScreen() {
+function MProductScreen() {
   const params = useParams();
-  const { point, slug } = params;
+  const { point } = params;
   const [
     { loadingListProduct, errorListProduct, listProduct },
     dispatchListProduct,
@@ -74,7 +74,7 @@ function ProductScreen() {
   useEffect(() => {
     const options1 = {
       body: {
-        pointId: slug,
+        pointId: JSON.parse(localStorage.user).pointId,
         type: 'received',
         pagesize: 0,
         pageindex: 0,
@@ -82,7 +82,7 @@ function ProductScreen() {
     };
     const options2 = {
       body: {
-        pointId: slug,
+        pointId: JSON.parse(localStorage.user).pointId,
         type: 'send',
         pagesize: 0,
         pageindex: 0,
@@ -126,9 +126,8 @@ function ProductScreen() {
       }
     };
     fetchData();
-  }, [slug]);
+  }, [point]);
   var list = listProduct2.concat(listProduct);
-  console.log(listProduct2);
   return (
     <div>
       <div className={styles.featuresHeading}>
@@ -178,4 +177,4 @@ function ProductScreen() {
     </div>
   );
 }
-export default ProductScreen;
+export default MProductScreen;
