@@ -3,10 +3,6 @@ import styles from './Hero.module.css';
 const Hero = () => {
   return (
     <div className={`${styles.heroWrapper} center`}>
-      <select className={styles.dropDown}>
-        <option value="US">US</option>
-        <option value="IN">IN</option>
-      </select>
       <div className={`${styles.heroInner}`}>
         <h2 className={styles.headerText}>Tra cứu đơn hàng của bạn</h2>
         <div className={styles.slogan}>
