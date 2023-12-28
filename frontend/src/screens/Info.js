@@ -73,8 +73,10 @@ function Info() {
         password: JSON.parse(localStorage.user).password,
         role: JSON.parse(localStorage.user).role,
         email: email ? email : JSON.parse(localStorage.user).email,
-        familyName: familyName,
-        lastName: lastName,
+        familyName: familyName
+          ? familyName
+          : JSON.parse(localStorage.user).familyName,
+        lastName: lastName ? lastName : JSON.parse(localStorage.user).lastName,
         dateOfBirth: 0,
         createdDate: 0,
         lastUpdatedDate: 0,
