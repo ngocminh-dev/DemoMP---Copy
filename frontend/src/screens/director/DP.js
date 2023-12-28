@@ -219,25 +219,31 @@ function DP() {
               placeholder={''}
               onChange={handleChange}
             />
-            <label for="gathering_point">Điểm tập kết: </label>
-            <select
-              id="gathering_point"
-              name="gathering_point"
-              onChange={handleChange}
-            >
-              <option value="" selected disabled>
-                Chọn điểm tập kết
-              </option>
-              {point === 'tp'
-                ? listGFT.map((p) => {
-                    return (
-                      <option value={p._id}>
-                        {p.code} - {p.name}
-                      </option>
-                    );
-                  })
-                : ''}
-            </select>
+            {point === 'tp' ? (
+              <>
+                <label for="gathering_point">Điểm tập kết: </label>
+                <select
+                  id="gathering_point"
+                  name="gathering_point"
+                  onChange={handleChange}
+                >
+                  <option value="" selected disabled>
+                    Chọn điểm tập kết
+                  </option>
+                  {point === 'tp'
+                    ? listGFT.map((p) => {
+                        return (
+                          <option value={p._id}>
+                            {p.code} - {p.name}
+                          </option>
+                        );
+                      })
+                    : ''}
+                </select>{' '}
+              </>
+            ) : (
+              ''
+            )}
           </div>
           <button type="button" onClick={handleAddPoint}>
             Thêm
