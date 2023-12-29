@@ -6,8 +6,10 @@ import CardTitle from 'react-bootstrap/esm/CardTitle';
 import CardText from 'react-bootstrap/esm/CardText';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
+import PrintPage from '../../screens/tpEmployee/PrintPage';
 const SERVER = 'https://magicpostbackend.onrender.com',
-  apiGetPackage = '/package-information/get-package-info-for-customer';
+  apiGetPackage = '/package-information/get-package-info-for-customer',
+  apiGetInfo = '/package-information/get-information';
 
 const reducerList = (state, action) => {
   switch (action.type) {
@@ -56,6 +58,30 @@ const Features = () => {
     };
     fetchData();
   }, []);
+  function handlePrint(p, ele) {
+    ele.target.disabled = true;
+    ele.target.innerHTML = 'Loading...';
+    console.log(p.packageId);
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(
+          SERVER + apiGetInfo,
+
+          {
+            params: { packageId: p._id },
+          }
+        );
+        PrintPage(result.data);
+        ele.target.disabled = false;
+        ele.target.innerHTML = 'Thông tin hàng';
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+
+    return;
+  }
   return (
     <div id="cart" className={`${styles.featuresWrapper} center`}>
       {!localStorage.token ? (
@@ -96,6 +122,9 @@ const Features = () => {
                         )}
                       </CardText>
                       <CardText>{p.message}</CardText>
+                      <button onClick={(evt) => handlePrint(p, evt)}>
+                        Thông tin hàng
+                      </button>
                     </CardBody>
                   </Card>
                 );

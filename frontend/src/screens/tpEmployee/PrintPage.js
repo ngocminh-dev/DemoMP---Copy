@@ -18,6 +18,10 @@ function PrintPage(params) {
   text = document.createTextNode('Gửi từ điểm giao dịch: ' + params.fromPoint);
   tag.appendChild(text);
   body.appendChild(tag);
+  tag = document.createElement('p');
+  text = document.createTextNode('Gửi đến điểm giao dịch: ' + params.toPoint);
+  tag.appendChild(text);
+  body.appendChild(tag);
   //2. Ho ten dia chi nguoi nhan
 
   tag = document.createElement('h3');
