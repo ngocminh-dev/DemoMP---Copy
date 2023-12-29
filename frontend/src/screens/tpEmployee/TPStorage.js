@@ -72,11 +72,10 @@ function TPStorage() {
     });
   };
 
-  const handleSendToStorage = (evt) => {
-    var packageId = evt.target.parentNode.parentNode.getAttribute('packageId');
+  function handleSendToStorage(p) {
     const options = {
       body: {
-        packageId: packageId,
+        packageId: p.packageId,
         fromPoint: JSON.parse(localStorage.user).pointId,
         toPoint: '',
         responsibleBy: JSON.parse(localStorage.user).username,
@@ -106,7 +105,7 @@ function TPStorage() {
       }
     };
     fetchData();
-  };
+  }
   function handleSendToUser(p) {
     const options = {
       body: {
@@ -194,7 +193,7 @@ function TPStorage() {
                   <button onClick={(evt) => handlePrint(p, evt)}>
                     Thông tin hàng
                   </button>
-                  <button onClick={handleSendToStorage}>
+                  <button onClick={() => handleSendToStorage(p)}>
                     Gửi hàng tới điểm tập kết
                   </button>
                   <button type="button" onClick={() => handleSendToUser(p)}>
