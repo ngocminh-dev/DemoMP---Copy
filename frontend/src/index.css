@@ -128,6 +128,7 @@ li {
   margin: 2rem;
   border: 2px solid rgb(186, 186, 186);
   border-radius: 5px;
+  width: 25%;
 }
 
 .card-body {
