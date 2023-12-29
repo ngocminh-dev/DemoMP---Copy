@@ -1,6 +1,6 @@
-import styles from "./Questions.module.css";
-import { questions } from "../../constants/questions";
-import Accordion from "../utils/Accordion";
+import styles from './Questions.module.css';
+import { questions } from '../../constants/questions';
+import Accordion from '../utils/Accordion';
 
 const Questions = () => {
   return (

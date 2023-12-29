@@ -9,7 +9,7 @@ const imgURL2 =
 
 const Growth = () => {
   return (
-    <div className={`${styles.growthWrapper} center`}>
+    <div id="about" className={`${styles.growthWrapper} center`}>
       <div className={`${styles.growthWrapperInner} center`}>
         <div className={styles.growthHeading}>
           <p>Dịch vụ chuyển phát hàng đầu cả nước</p>

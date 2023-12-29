@@ -59,7 +59,7 @@ const Features = () => {
     fetchData();
   }, []);
   return (
-    <div className={`${styles.featuresWrapper} center`}>
+    <div id="cart" className={`${styles.featuresWrapper} center`}>
       {!localStorage.token ? (
         <div className={styles.featuresHeading}>
           <p>Vui lòng đăng nhập để xem trạng thái đơn hàng của bạn</p>

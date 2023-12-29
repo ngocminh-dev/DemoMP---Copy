@@ -43,14 +43,14 @@ const Navbar = ({ hamActive, setHamActive }) => {
           <div className={styles.navLinksWrapper}>
             <div className={styles.verticalLine}> </div>
 
-            <a href="/" className={`${styles.nav} center`}>
-              Tận tâm
+            <a href="/#cart" className={`${styles.nav} center`}>
+              Giỏ hàng
             </a>
-            <a href="/" className={`${styles.nav} center`}>
-              Tận lực
+            <a href="/#about" className={`${styles.nav} center`}>
+              Về chúng tôi
             </a>
-            <a href="/" className={`${styles.nav} center`}>
-              Tích cực
+            <a href="/#contact" className={`${styles.nav} center`}>
+              Liên hệ
             </a>
           </div>
           {!localStorage.token ? (
