@@ -1,69 +1,47 @@
 export const questions = [
   {
-    question: "How does Instacart delivery and curbside pickup work?",
+    question: "PHỦ SÓNG 99% HUYỆN XÃ",
     answer:
-      "Instacart makes it easy to order from your favorite stores. Shop for items from stores near you, with a selection of more than 500 retailers and trusted local grocers across North America. Then, Instacart will connect you with a personal shopper in your area to shop and deliver your order. Contactless delivery is available with our “Leave at my door” option.\n" +
-      "\n" +
-      "You can track your order’s progress and communicate with your shopper every step of the way using the Instacart app or website.\n" +
-      "\n" +
-      "Instacart also offers curbside pickup at select retail locations. Simply place your order and choose a pickup time, and a shopper will prepare your order at the store.\n" +
-      "\n" +
-      "When you get to the store, use the Instacart app to notify us. Depending on the store, a shopper or store employee will bring the groceries to your car, or you can pick them up at the designated area.",
+      "Lấy hàng / Giao hàng trên 11.000 huyện xã trên toàn quốc.",
   },
   {
-    question: "How much does Instacart cost?",
+    question: "GIAO NHANH KHÔNG KỊP HỦY",
     answer:
-      "Instacart makes it easy to order from your favorite stores. Shop for items from stores near you, with a selection of more than 500 retailers and trusted local grocers across North America. Then, Instacart will connect you with a personal shopper in your area to shop and deliver your order. Contactless delivery is available with our “Leave at my door” option.\n" +
+      "Giao nội tỉnh 6-12h/\n" +
       "\n" +
-      "You can track your order’s progress and communicate with your shopper every step of the way using the Instacart app or website.\n" +
+      "Giao nội miền 24-36h/\n" +
       "\n" +
-      "Instacart also offers curbside pickup at select retail locations. Simply place your order and choose a pickup time, and a shopper will prepare your order at the store.\n" +
-      "\n" +
-      "When you get to the store, use the Instacart app to notify us. Depending on the store, a shopper or store employee will bring the groceries to your car, or you can pick them up at the designated area.",
-  },
+      "Giao liên miền 48h.\n" + "\n",
+  }
+  ,
+  
   {
-    question: "Will I pay the same price on Instacart as I would in the store?",
+    question: "APP CHO IOS VÀ ANDROID",
     answer:
-      "Instacart makes it easy to order from your favorite stores. Shop for items from stores near you, with a selection of more than 500 retailers and trusted local grocers across North America. Then, Instacart will connect you with a personal shopper in your area to shop and deliver your order. Contactless delivery is available with our “Leave at my door” option.\n" +
-      "\n" +
-      "You can track your order’s progress and communicate with your shopper every step of the way using the Instacart app or website.\n" +
-      "\n" +
-      "Instacart also offers curbside pickup at select retail locations. Simply place your order and choose a pickup time, and a shopper will prepare your order at the store.\n" +
-      "\n" +
-      "When you get to the store, use the Instacart app to notify us. Depending on the store, a shopper or store employee will bring the groceries to your car, or you can pick them up at the designated area.",
-  },
+      "Đăng đơn - Tracking - Xử lý đơn hàng mọi lúc mọi nơi trên điện thoại!",
+      
+  }
+  ,
   {
-    question:
-      "What happens if something is out of stock and I need to give spesific instructions?",
+    question: "ĐỐI SOÁT TRẢ TIỀN NHANH",
     answer:
-      "Instacart makes it easy to order from your favorite stores. Shop for items from stores near you, with a selection of more than 500 retailers and trusted local grocers across North America. Then, Instacart will connect you with a personal shopper in your area to shop and deliver your order. Contactless delivery is available with our “Leave at my door” option.\n" +
-      "\n" +
-      "You can track your order’s progress and communicate with your shopper every step of the way using the Instacart app or website.\n" +
-      "\n" +
-      "Instacart also offers curbside pickup at select retail locations. Simply place your order and choose a pickup time, and a shopper will prepare your order at the store.\n" +
-      "\n" +
-      "When you get to the store, use the Instacart app to notify us. Depending on the store, a shopper or store employee will bring the groceries to your car, or you can pick them up at the designated area.",
-  },
+      "Chuyển khoản vào tài khoản NH 3 lần/tuần vào thứ 2/4/6",
+      
+  }
+  ,
   {
-    question: "What happens if there's an issue with my order?",
+    question: "GIAO HÀNG LINH HOẠT",
     answer:
-      "Instacart makes it easy to order from your favorite stores. Shop for items from stores near you, with a selection of more than 500 retailers and trusted local grocers across North America. Then, Instacart will connect you with a personal shopper in your area to shop and deliver your order. Contactless delivery is available with our “Leave at my door” option.\n" +
-      "\n" +
-      "You can track your order’s progress and communicate with your shopper every step of the way using the Instacart app or website.\n" +
-      "\n" +
-      "Instacart also offers curbside pickup at select retail locations. Simply place your order and choose a pickup time, and a shopper will prepare your order at the store.\n" +
-      "\n" +
-      "When you get to the store, use the Instacart app to notify us. Depending on the store, a shopper or store employee will bring the groceries to your car, or you can pick them up at the designated area.",
-  },
+      "Linh hoạt giao hàng cho khách chọn, đổi địa chỉ giao, đổi tiền thu hộ, đổi SĐT, đổi người nhận hàng,…",
+      
+  }
+  ,
   {
-    question: "Can I get contactless delivery with Instacart?",
+    question: "MIỄN PHÍ GIAO NHIỀU LẦN",
     answer:
-      "Instacart makes it easy to order from your favorite stores. Shop for items from stores near you, with a selection of more than 500 retailers and trusted local grocers across North America. Then, Instacart will connect you with a personal shopper in your area to shop and deliver your order. Contactless delivery is available with our “Leave at my door” option.\n" +
-      "\n" +
-      "You can track your order’s progress and communicate with your shopper every step of the way using the Instacart app or website.\n" +
-      "\n" +
-      "Instacart also offers curbside pickup at select retail locations. Simply place your order and choose a pickup time, and a shopper will prepare your order at the store.\n" +
-      "\n" +
-      "When you get to the store, use the Instacart app to notify us. Depending on the store, a shopper or store employee will bring the groceries to your car, or you can pick them up at the designated area.",
-  },
+      "",
+      
+  }
+  ,
+
 ];

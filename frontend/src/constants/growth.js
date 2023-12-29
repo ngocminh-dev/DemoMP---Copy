@@ -1,18 +1,18 @@
 export const growth = [
   {
-    field: "500 million products",
-    description: "available to shop across the catalog",
+    field: "Tiếp nhận đơn hàng",
+    description: "Shop đăng nhập và đăng đơn hàng cho trung tâm điều vận Magic Post qua hệ thống quản lý riêng",
   },
   {
-    field: "40,000 stores",
-    description: "from local grocers to chain stores",
+    field: "Lấy hàng",
+    description: "Nhân viên Magic Post qua địa chỉ shop để lấy hàng tận nơi",
   },
   {
-    field: "5,500+ cities",
-    description: "served across the U.S. & Canada",
+    field: "Giao hàng",
+    description: "Magic Post giao hàng cho khách hàng và thu hộ tiền trực tiếp (Cash on Delivery)",
   },
   {
-    field: "Millions of orders",
-    description: "delivered or picked up yearly",
+    field: "Kết thúc",
+    description: "Hoàn thành",
   },
 ];

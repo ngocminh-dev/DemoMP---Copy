@@ -7,7 +7,7 @@ const Questions = () => {
     <div className={`${styles.QuestionWrapper} center`}>
       <div className={`${styles.QuestionsWrapperInner} center`}>
         <div className={styles.QuestionsHeading}>
-          <p>Common questions</p>
+          <p>Bạn có biết?</p>
         </div>
         <div className={`${styles.QuestionsList} center`}>
           {questions.map(({ question, answer }) => {

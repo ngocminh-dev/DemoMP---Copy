@@ -44,13 +44,13 @@ const Navbar = ({ hamActive, setHamActive }) => {
             <div className={styles.verticalLine}> </div>
 
             <a href="/" className={`${styles.nav} center`}>
-              NavItem1
+              Tận tâm
             </a>
             <a href="/" className={`${styles.nav} center`}>
-              NavItem2
+              Tận lực
             </a>
             <a href="/" className={`${styles.nav} center`}>
-              Help
+              Tích cực
             </a>
           </div>
           {!localStorage.token ? (

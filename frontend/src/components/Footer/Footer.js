@@ -6,15 +6,8 @@ const Footer = () => {
     <nav className={`${styles.navbarWrapper} center`}>
       <div className={`${styles.navbarColumn} center`}>
         <div className={`${styles.navbarInner} center`}>
-          <div className={`${styles.navLeft}`}>Legal</div>
-          <div className="center">
-            <a href="/" className={`${styles.navLink}`}>
-              Terms of use
-            </a>
-            <a href="/" className={`${styles.navLink}`}>
-              Privacy policy
-            </a>
-          </div>
+          <div className={`${styles.navLeft}`}>LIÊN HỆ VỚI CHÚNG TÔI NGAY </div>
+          
           <div>
             <span>
               <a href="#facebook" className="fab fa-facebook-square">
@@ -44,11 +37,9 @@ const Footer = () => {
           {/* </div> */}
         </div>
         <div className={`${styles.footerText} center`}>
+          
           <p>
-            Apple and the Apple logo are trademarks of Apple Inc., registered in
-            the U.S. and other countries. App Store is a service mark of Apple
-            Inc. Android, Google Play and the Google Play logo are trademarks of
-            Google LLC.
+            Trân trọng cảm ơn quý khách!
           </p>
         </div>
       </div>
