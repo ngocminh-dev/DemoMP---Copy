@@ -1,11 +1,9 @@
-import { Fragment, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import styles from './Features.module.css';
-import { features } from '../../constants/features';
 import Card from 'react-bootstrap/Card';
 import CardBody from 'react-bootstrap/esm/CardBody';
 import CardTitle from 'react-bootstrap/esm/CardTitle';
 import CardText from 'react-bootstrap/esm/CardText';
-import CardImg from 'react-bootstrap/esm/CardImg';
 import axios from 'axios';
 import logger from 'use-reducer-logger';
 const SERVER = 'https://magicpostbackend.onrender.com',
@@ -67,7 +65,7 @@ const Features = () => {
       ) : loadingList ? (
         <p style={{ textAlign: 'center' }}>Loading list ...</p>
       ) : errorList ? (
-        <p>{'Không tải được đơn hàng'}</p>
+        <p>{''}</p>
       ) : (
         <div>
           <div className={styles.featuresHeading}>
@@ -100,20 +98,6 @@ const Features = () => {
                       <CardText>{p.message}</CardText>
                     </CardBody>
                   </Card>
-                  /*
-              <div className={`${styles.featureDiv} center`}>
-                <Fragment>
-                  <div className={styles.feature}>
-                    <p>{feature}</p>
-                  </div>
-                  <div className={styles.featureDescription}>
-                    <p>{description}</p>
-                  </div>
-                  <div>
-                    <img className={styles.featureImg} src={image} alt="img" />
-                  </div>
-                </Fragment>
-              </div>*/
                 );
               })}
             </div>
