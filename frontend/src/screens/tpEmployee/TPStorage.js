@@ -67,8 +67,8 @@ function TPStorage() {
     var searchValue = evt.target.value.toUpperCase() || '';
     packages.map((p) => {
       if (p.packageId.toUpperCase().indexOf(searchValue) > -1)
-        document.getElementById(p.packageId).style.display = '';
-      else document.getElementById(p.packageId).style.display = 'none';
+        document.getElementById(p._id).style.display = '';
+      else document.getElementById(p._id).style.display = 'none';
     });
   };
 
@@ -186,7 +186,7 @@ function TPStorage() {
         <div className={`${styles.featuresList} `}>
           {packages.toReversed().map((p) => {
             return (
-              <Card key={p._id} packageId={p.packageId} id={p.packageId}>
+              <Card key={p._id} id={p._id}>
                 <CardBody>
                   <CardTitle style={{ fontSize: '1.5rem' }}>
                     {'Mã hàng: ' + p.packageId}

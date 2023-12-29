@@ -55,8 +55,8 @@ function TPStorage() {
     var searchValue = evt.target.value.toUpperCase() || '';
     packages.map((p) => {
       if (p.packageId.toUpperCase().indexOf(searchValue) > -1)
-        document.getElementById(p.packageId).style.display = '';
-      else document.getElementById(p.packageId).style.display = 'none';
+        document.getElementById(p._id).style.display = '';
+      else document.getElementById(p._id).style.display = 'none';
     });
   };
 
