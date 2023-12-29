@@ -9,8 +9,6 @@ import Info from './screens/Info.js';
 import Footer from './components/Footer/Footer.js';
 
 import './style.css';
-import RecordSend from './screens/tpEmployee/RecordSend.js';
-import RecordReceive from './screens/tpEmployee/RecordReceive.js';
 import TPList from './screens/tpEmployee/TPList.js';
 
 import GpConfirm from './screens/gpEmployee/gpConfirm.js';
@@ -42,8 +40,6 @@ export default function App() {
 
           {/*Trans employee*/}
           <Route path="/tpEmployee/create" element={<TPCreate />} />
-          <Route path="/tpEmployee/recordSend" element={<RecordSend />} />
-          <Route path="/tpEmployee/recordReceive" element={<RecordReceive />} />
           <Route path="/tpEmployee/list" element={<TPList />} />
           <Route path="/tpEmployee/storage" element={<TPStorage />} />
           <Route

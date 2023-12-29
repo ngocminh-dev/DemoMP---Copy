@@ -65,10 +65,7 @@ function TPList() {
     packages.map((p) => {
       if (
         p.packageId.toUpperCase().indexOf(searchValue) > -1 ||
-        p.responsibleBy.toUpperCase().indexOf(searchValue) > -1 /*|| 
-        p.status.toUpperCase().indexOf(searchValue) > -1||
-        p.receiverAddress.toUpperCase().indexOf(searchValue) > -1 ||
-        p.receiverPhone.toUpperCase().indexOf(searchValue) > -1**/
+        p.responsibleBy.toUpperCase().indexOf(searchValue) > -1
       )
         document.getElementById(p._id).style.display = '';
       else document.getElementById(p._id).style.display = 'none';
